@@ -176,7 +176,7 @@
                     as the 26th most populous city in the United States. Portland's metro population of 2,389,228 ranks
                     the 23rd largest metro in the nation. The Willamette Valley in western Oregon is the state's most
                     densely populated area, home to eight of the ten most populous cities.</p>
-                <img src="../../img/oregon_flag.png" class="img-responsive img-thumbnail" alt="responsive image"
+                <img src="img/oregon_flag.png" class="img-responsive img-thumbnail" alt="responsive image"
                      alt-text="the flag of oregon">
                 <p>Oregon's landscape is diverse, with a windswept Pacific coastline; a volcano-studded Cascade Range;
                     abundant bodies of water in and west of the Cascades; dense evergreen, mixed, and deciduous forests
@@ -263,7 +263,7 @@
     var layers = {
         ESRI: {layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}')},
         counties: {
-            layer: L.geoJson.ajax('../../assets/counties.geojson', {
+            layer: L.geoJson.ajax('assets/counties.geojson', {
                 color: 'orange',
                 weight: 2,
                 opacity: 0.3
