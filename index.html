@@ -74,8 +74,21 @@
                     heavy rain. Depending on its location and strength, a tropical cyclone is referred to by different
                     names, including hurricane, typhoon, tropical storm, cyclonic storm, tropical depression, and simply
                     cyclone. <b>A hurricane is a tropical cyclone that occurs in the Atlantic Ocean and northeastern
-                    Pacific Ocean, and a typhoon occurs in the northwestern Pacific Ocean</b>; while in the south Pacific
+                    Pacific Ocean</b>, and a typhoon occurs in the northwestern Pacific Ocean; while in the south Pacific
                     "tropical cyclones" or "severe cyclonic storms".</p>
+                <p>To be classified as a hurricane, a tropical cyclone must have one-minute maximum sustained winds of at
+                  least 74 mph (33 m/s; 64 kn; 119 km/h) (Category 1). The highest classification in the scale, Category
+                  5, consists of storms with sustained winds over 156 mph (70 m/s; 136 kn; 251 km/h). The classifications
+                  can provide some indication of the potential damage and flooding a hurricane will cause upon landfall. </p>
+                <p>Officially, the Saffir–Simpson hurricane wind scale is based on the highest average wind over a one-
+                  minute time span and used only to describe hurricanes that form in the Atlantic Ocean and northern
+                  Pacific Ocean east of the International Date Line. Other areas use different scales to label these
+                  storms, which are called cyclones or typhoons, depending on the area. These areas (except the JTWC)
+                  use three-minute or ten-minute averaged winds to determine the maximum sustained winds—which is an
+                  important difference and makes direct comparison with storms scaled with the Saffir–Simpson method
+                  difficult.</p>
+                <img src="img/saffir.jpg" class="img-responsive img-thumbnail" alt="responsive image"
+                         alt-text="Saffir-Simpson Hurricane Wind Scale">
 
             </section>
 
@@ -226,7 +239,9 @@
 
     // Create Legend Contents in html format
     var katrina_legend = '<i style="background: orange; opacity: 0.5"></i><p><b>Hurricane Katrina (2005) path</b></p>';
+    var sandy_legend = '<i style="background: orange; opacity: 0.5"></i><p><b>Hurricane Sandy (2012) path</b></p>';
     var forest_legend = '<i style="background: green; opacity: 0.5"></i><p><b>Forest</b></p>';
+    var hurricanes_legend = '<i style="background: orange; opacity: 0.5"></i><p><b>Paths of storms with hurricane-speed winds, 2000-2017</b></p>';
 
     // For each layer, the first variable is the layer, the second is the legend. The layer variable can be any kinds of layers that leaflet.js supports.
     // var layers = {
@@ -248,7 +263,13 @@
             layer: L.geoJson.ajax('assets/century.geojson', {
                 color: 'orange',
                 weight: 2,
-            }),
+            }), legend: hurricanes_legend
+        },
+        sandy: {
+            layer: L.geoJson.ajax('assets/sandy.geojson', {
+                color: 'orange',
+                weight: 2,
+            }), legend: sandy_legend
         },
         GEE: {
             layer: L.tileLayer('http://earthengine.google.org/static/hansen_2013/tree_alpha/{z}/{x}/{y}.png'),
@@ -263,9 +284,9 @@
     };
 
     var scenes = {
-        overview: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Cover Page', layers: []},
-        hurricanes: {lat: 30, lng: -84, zoom: 4, name: 'Hurricanes', layers: [layers.hurricanes, layers.ESRI]},
-        impact: {lat: 36, lng: -79, zoom: 6, name: 'impact', layers: [layers.ESRI]},
+        overview: {lat: 44.0000000, lng: -135.5000000, zoom: 7, name: 'Cover Page', layers: []},
+        hurricanes: {lat: 33, lng: -93, zoom: 4, name: 'Hurricanes', layers: [layers.hurricanes, layers.ESRI]},
+        impact: {lat: 36, lng: -79, zoom: 6, name: 'impact', layers: [layers.ESRI, layers.sandy]},
         salem: {lat: 44.9419055, lng: -123.0356407, zoom: 13, name: 'Salem', layers: []},
         bend: {lat: 30, lng: -90, zoom: 7, name: 'Bend', layers: [layers.katrina, layers.satellite]},
         oregon: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Oregon State', layers: [layers.GEE]},
