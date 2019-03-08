@@ -7,7 +7,7 @@
 
     <!--meta data for sharing links on Facebook-->
     <meta property="og:title" content="A story map showing hurricane tracks in the United States"/>
-    <meta property="og:url" content="http://geoviz.ceoas.oregonstate.edu/storymap/examples/2.5/video.html"/>
+    <meta property="og:url" content="https://csbmaps.github.io/hurricanes/"/>
     <meta property="og:description" content="This is an example of a storymap."/>
     <meta property="og:image" content="../../img/social.png"/>
 
@@ -182,12 +182,12 @@
         </dt>
         <dt>
             <!--facebook icon-->
-            <a class="fab fa-github btn" href="https://github.com/csbmaps/hurricanes" style="top:40px"
+            <a class="fab fa-github btn" href="https://github.com/csbmaps/hurricanes" style="bottom:139px"
                target="_blank"></a>
         </dt>
         <dt>
             <!--info icon-->
-            <i class="fas fa-info-circle btn" style="top:60px" data-toggle="modal" data-target="#info-modal"></i>
+            <i class="fas fa-info-circle btn" style="bottom:108px" data-toggle="modal" data-target="#info-modal"></i>
         </dt>
     </dl>
 
@@ -212,6 +212,8 @@
                     <p>The favicon image was acquired from <a href="https://thenounproject.com/term/hurricane/381298/">this link.</a></p>
                     <p>This story map uses geospatial data from mapbox, Google Earth Engine, ESRI Map, Open Street Maps
                         and Oregon Explorer.</p>
+                    <p>Hurrican track data taken from NOAA open data site. Data used is IBTrACS-All Data, located <a href= https://www.ncdc.noaa.gov/ibtracs/index.php?name=ibtracs-data>here.</a>
+
                 </div>
             </div>
         </div>
@@ -223,7 +225,7 @@
 
 
     // Create Legend Contents in html format
-    var county_legend = '<i style="background: orange; opacity: 0.5"></i><p><b>Counties</b></p>';
+    var katrina_legend = '<i style="background: orange; opacity: 0.5"></i><p><b>Hurricane Katrina (2005) path</b></p>';
     var forest_legend = '<i style="background: green; opacity: 0.5"></i><p><b>Forest</b></p>';
 
     // For each layer, the first variable is the layer, the second is the legend. The layer variable can be any kinds of layers that leaflet.js supports.
@@ -234,13 +236,13 @@
     // }
 
     var layers = {
-        ESRI: {layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}')},
+        ESRI: {layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}')},
         katrina: {
             layer: L.geoJson.ajax('assets/katrina.geojson', {
                 color: 'orange',
                 weight: 2,
                 opacity: 0.3
-            }), legend: county_legend
+            }), legend: katrina_legend
         },
         hurricanes: {
             layer: L.geoJson.ajax('assets/century.geojson', {
@@ -248,12 +250,6 @@
                 weight: 2,
             }),
         },
-        // katrina: {
-        //     layer: new L.fileGDB('assets/hurricanes.gdb', {
-        //         color: 'orange',
-        //         weight: 0.3,
-        //     }),
-        // },
         GEE: {
             layer: L.tileLayer('http://earthengine.google.org/static/hansen_2013/tree_alpha/{z}/{x}/{y}.png'),
             legend: forest_legend
@@ -268,7 +264,7 @@
 
     var scenes = {
         overview: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Cover Page', layers: []},
-        hurricanes: {lat: 15, lng: -75, zoom: 4, name: 'Hurricanes', layers: [layers.hurricanes]},
+        hurricanes: {lat: 30, lng: -84, zoom: 4, name: 'Hurricanes', layers: [layers.hurricanes, layers.ESRI]},
         impact: {lat: 36, lng: -79, zoom: 6, name: 'impact', layers: [layers.ESRI]},
         salem: {lat: 44.9419055, lng: -123.0356407, zoom: 13, name: 'Salem', layers: []},
         bend: {lat: 30, lng: -90, zoom: 7, name: 'Bend', layers: [layers.katrina, layers.satellite]},
@@ -295,7 +291,7 @@
 
             //add an miniglobe
             new L.Control.GlobeMiniMap({
-                marker: 'red',
+                marker: 'blue',
                 position: 'bottomright'
             }).addTo(map);
 
