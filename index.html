@@ -261,7 +261,7 @@
     var layers = {
         ESRI: {layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}')},
         katrina: {
-            layer: L.geoJson.ajax('assets/katrina.geojson', {
+            layer: L.geoJson.ajax('../assets/katrina.geojson', {
                 color: 'orange',
                 weight: 2,
             }), legend: katrina_legend
